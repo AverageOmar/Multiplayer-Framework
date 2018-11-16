@@ -16,9 +16,9 @@ namespace SimpleServerCS
         public Socket _Socket;
         private Thread _Thread;
 
-        private NetworkStream _Stream;
-        private BinaryReader _Reader;
-        private BinaryWriter _Writer;
+        public NetworkStream _Stream;
+        public BinaryReader _Reader;
+        public BinaryWriter _Writer;
         private BinaryFormatter _Formatter;
 
         public Client(Socket socket)

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Windows.Forms;
 
 namespace SimpleClientCS
 {
@@ -26,6 +27,9 @@ namespace SimpleClientCS
         public SimpleClient()
         {
             _tcpClient = new TcpClient();
+
+            Application.EnableVisualStyles();
+            Application.Run(new GameForm());
         }
 
         public bool Connect(string hostname, int port)
@@ -65,10 +69,7 @@ namespace SimpleClientCS
                     _writer.Flush();
 
                     ProcessServerResponse();
-
-                    if (userInput.Equals("9"))
-                        break;
-
+                    
                     Console.Write("Enter the data to be sent: ");
                 }
             }

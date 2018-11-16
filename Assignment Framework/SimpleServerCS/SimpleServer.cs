@@ -18,10 +18,10 @@ namespace SimpleServerCS
         static List<Client> _clients = new List<Client>();
         private BinaryFormatter _BinaryFormatter;
 
-        public SimpleServer(bool UseLoopback, int port)
+        public SimpleServer(string ipAddress, int port)
         {
-            IPAddress ipAddress = UseLoopback ? IPAddress.Loopback : LocalIPAddress();
-            _tcpListener = new TcpListener(ipAddress, port);
+            IPAddress ip = IPAddress.Parse(ipAddress);
+            _tcpListener = new TcpListener(ip, port);
         }
 
         public void Start()
@@ -35,12 +35,11 @@ namespace SimpleServerCS
                 {
                     Socket socket = _tcpListener.AcceptSocket();
                     Console.WriteLine("Connection Made");
-                    Client a = new Client(socket);
-                    _clients.Add(a);
-                    a.Start();
+                    Client newClient = new Client(socket);
+                    _clients.Add(newClient);
+                    newClient.Start();
                 }
             }
-            
         }
 
         public void Stop()
@@ -48,40 +47,41 @@ namespace SimpleServerCS
             _tcpListener.Stop();
         }
 
-        public static void SocketMethod(Client socket)
+        public static void SocketMethod(Client client)
         {
-            Socket client = socket.Socket;
+            Socket socket = client._Socket;
 
             try
             {
-                string receivedMessage;
-                
-                NetworkStream stream = new NetworkStream(client, true);
-                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
-                StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
-
-                writer.WriteLine("Send 0 for available options");
-                writer.Flush();
-
-                while ((receivedMessage = reader.ReadLine()) != null)
+                int noOfIncomingBytes;
+                while ((noOfIncomingBytes = client._Reader.ReadInt32()) != 0)
                 {
-                    Console.WriteLine("Received...");
+                    byte[] bytes = client._Reader.ReadBytes(noOfIncomingBytes);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    MemoryStream memoryStream = new MemoryStream(bytes);
+                    Packet packet = bf.Deserialize(memoryStream) as Packet;
 
-                    int i;
-
-                    if (Int32.TryParse(receivedMessage, out i))
+                    switch (packet.type)
                     {
-                        //writer.Write(GetReturnMessage(i));
+                        case PacketType.EMPTY:
+                            foreach (Client c in _clients)
+                            {
+                                c.Send(packet);
+                            }
+                            break;
+                        case PacketType.NICKNAME:
+                            foreach (Client c in _clients)
+                            {
+                                c.Send(packet);
+                            }
+                            break;
+                        case PacketType.CHATMESSAGE:
+                            foreach (Client c in _clients)
+                            {
+                                c.Send(packet);
+                            }
+                            break;
                     }
-                    else
-                    {
-                        //writer.Write(GetReturnMessage(-1));
-                    }
-
-                    writer.Flush();
-
-                    if (i == 9)
-                        break;
                 }
             }
             catch (Exception e)
@@ -94,46 +94,9 @@ namespace SimpleServerCS
             }
         }
 
-        private string GetReturnMessage(int code)
+        private string GetReturnMessage(Packet packet)
         {
-            string returnMessage;
-
-            switch (code)
-            {
-                case 0:
-                    returnMessage = "Send 1, 3, 5 or 7 for a joke. Send 9 to close the connection.";
-                    break;
-                case 1:
-                    returnMessage = "What dog can jump higher than a building? Send 2 for punchline!";
-                    break;
-                case 2:
-                    returnMessage = "Any dog, buildings can't jump!";
-                    break;
-                case 3:
-                    returnMessage = "When do Ducks wake up? Send 4 for punchline!";
-                    break;
-                case 4:
-                    returnMessage = "At the Quack of Dawn!";
-                    break;
-                case 5:
-                    returnMessage = "How do cows do mathematics? Send 6 for punchline!";
-                    break;
-                case 6:
-                    returnMessage = "They use a cow-culator.";
-                    break;
-                case 7:
-                    returnMessage = "How many programmers does it take to screw in a light bulb? Send 8 for punchline!";
-                    break;
-                case 8:
-                    returnMessage = "None, that's a hardware problem.";
-                    break;
-                case 9:
-                    returnMessage = "Bye!";
-                    break;
-                default:
-                    returnMessage = "Invalid Selection";
-                    break;
-            }
+            string returnMessage = "";
 
             return returnMessage;
         }
