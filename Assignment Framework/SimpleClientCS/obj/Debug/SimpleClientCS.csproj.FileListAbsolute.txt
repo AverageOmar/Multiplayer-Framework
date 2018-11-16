@@ -1,6 +1,0 @@
-E:\Uni year 3\Multiplayer Games Programming\SimpleClient\SimpleClientCS\bin\Debug\SimpleClientCS.exe
-E:\Uni year 3\Multiplayer Games Programming\SimpleClient\SimpleClientCS\bin\Debug\SimpleClientCS.pdb
-E:\Uni year 3\Multiplayer Games Programming\SimpleClient\SimpleClientCS\obj\Debug\SimpleClientCS.csprojAssemblyReference.cache
-E:\Uni year 3\Multiplayer Games Programming\SimpleClient\SimpleClientCS\obj\Debug\SimpleClientCS.csproj.CoreCompileInputs.cache
-E:\Uni year 3\Multiplayer Games Programming\SimpleClient\SimpleClientCS\obj\Debug\SimpleClientCS.exe
-E:\Uni year 3\Multiplayer Games Programming\SimpleClient\SimpleClientCS\obj\Debug\SimpleClientCS.pdb
