@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleServerCS", "SimpleServerCS\SimpleServerCS.csproj", "{A9C69093-55DC-454A-BFFD-5365375F5A5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleClientCS", "..\SimpleClient\SimpleClientCS\SimpleClientCS.csproj", "{13146887-4450-4941-B39F-A6E95CE155E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleClientCS", "SimpleClientCS\SimpleClientCS.csproj", "{13146887-4450-4941-B39F-A6E95CE155E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{3D153F65-1004-476E-AF0D-038468985C2E}"
 EndProject
