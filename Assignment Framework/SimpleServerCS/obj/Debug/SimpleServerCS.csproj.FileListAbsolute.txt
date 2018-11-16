@@ -1,0 +1,6 @@
+E:\Uni year 3\Multiplayer Games Programming\SimpleServer\SimpleServerCS\bin\Debug\SimpleServerCS.exe
+E:\Uni year 3\Multiplayer Games Programming\SimpleServer\SimpleServerCS\bin\Debug\SimpleServerCS.pdb
+E:\Uni year 3\Multiplayer Games Programming\SimpleServer\SimpleServerCS\obj\Debug\SimpleServerCS.csprojAssemblyReference.cache
+E:\Uni year 3\Multiplayer Games Programming\SimpleServer\SimpleServerCS\obj\Debug\SimpleServerCS.csproj.CoreCompileInputs.cache
+E:\Uni year 3\Multiplayer Games Programming\SimpleServer\SimpleServerCS\obj\Debug\SimpleServerCS.exe
+E:\Uni year 3\Multiplayer Games Programming\SimpleServer\SimpleServerCS\obj\Debug\SimpleServerCS.pdb
