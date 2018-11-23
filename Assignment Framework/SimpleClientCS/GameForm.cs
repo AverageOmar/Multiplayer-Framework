@@ -18,7 +18,8 @@ namespace SimpleClientCS
 
         private void GameForm_Load(object sender, EventArgs e)
         {
-
+            GameChat.Enabled = false;
+            FocusOnMe.Focus();
         }
 
         private void NickName_Enter(object sender, EventArgs e)
@@ -31,8 +32,18 @@ namespace SimpleClientCS
 
         private void GameForm_MouseMove(object sender, MouseEventArgs e)
         {
-            int mousePositionX = System.Windows.Forms.Cursor.Position.X;
-            int mousePositionY = System.Windows.Forms.Cursor.Position.Y;
+            int XPosition = e.X;
+            int YPosition = e.Y;
+
+            int fXPosition = ((XPosition / 3) + 600) + this.Location.X - CursorImage.Size.Width;
+            int fYPosition = (YPosition / 3) + this.Location.Y + CursorImage.Size.Height;
+
+            CursorImage.Location = this.PointToClient(new Point((int)fXPosition, (int)fYPosition));
+        }
+
+        private void CursorImage_MouseMove(object sender, MouseEventArgs e)
+        {
+            CursorImage.Location = this.PointToClient(Cursor.Position);
         }
     }
 }
